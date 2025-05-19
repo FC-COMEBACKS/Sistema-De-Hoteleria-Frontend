@@ -1,0 +1,1 @@
+export { default as roomPage } from "./roomPage.jsx";

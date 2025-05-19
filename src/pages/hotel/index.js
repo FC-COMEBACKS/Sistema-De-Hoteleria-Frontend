@@ -1,0 +1,1 @@
+export { default as hotelPage } from "./hotelPage.jsx";
