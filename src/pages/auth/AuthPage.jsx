@@ -19,7 +19,6 @@ const AuthPage = () => {
         )}
       </div>
       <div className="right-section">
-        {/* Aquí puedes poner un logo o imagen si quieres */}
       </div>
     </div>
   );

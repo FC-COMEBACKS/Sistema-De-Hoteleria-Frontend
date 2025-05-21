@@ -1,1 +1,1 @@
-export { default as hotelPage } from "./hotelPage.jsx";
+export { default as HotelPage } from "./hotelPage.jsx";

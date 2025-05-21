@@ -18,15 +18,13 @@ export const useRegister = () => {
         })
 
         setIsLoading(false)
-        console.log(response)
         if (response.error) {
             toast.error(response.err?.response?.data?.errors?.[0]?.msg || "Error al registrar tu cuenta")
-            return // Salir si hay error
+            return 
         } else {
             toast.success(response.data.message)
         }
 
-        // Solo intentar acceder a userDetails si existe
         const userDetails = response.data?.userDetails
         if (userDetails) {
             localStorage.setItem("user", JSON.stringify(userDetails))

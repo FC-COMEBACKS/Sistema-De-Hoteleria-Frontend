@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  background: transparent; /* Fondo transparente */
+  background: transparent; 
   padding: 1em 0;
   display: flex;
   justify-content: center;
@@ -9,7 +9,6 @@
   color: #fff;
   font-weight: bold;
   font-size: 1.1em;
-  /* Opcional: sombra para mejor contraste */
   text-shadow: 0 1px 4px rgba(0,0,0,0.7);
 }
 

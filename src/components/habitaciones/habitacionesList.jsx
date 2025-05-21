@@ -29,7 +29,7 @@ const HabitacionesList = () => {
     const handleEditRoom = (roomToEdit) => {
         setEditingRoom(roomToEdit);
         setShowForm(true);
-    };
+    }; 
 
     const filteredRooms = rooms.filter((room) =>
         room.name.toLowerCase().includes(search.toLowerCase())

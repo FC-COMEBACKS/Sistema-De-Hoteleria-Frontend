@@ -22,16 +22,15 @@ export const useLogin = () => {
 
         if(response.error){
             toast.error(response.err?.response?.data?.errors?.[0]?.msg || "Error iniciar sesión")
-            return; // Salir si hay error
+            return; 
         }else{
             toast.success(response.data.message)
         }
 
-
         const { userDetails } = response.data || {};
         if (userDetails) {
             localStorage.setItem('user', JSON.stringify(userDetails));
-            if (userDetails.role === "ADMIN_ROLE") {
+            if (userDetails.role === "ADMIN_ROLE" || userDetails.role === "HOST_ROLE") {
                 navigate("/admin");
             } else {
                 navigate("/cliente");

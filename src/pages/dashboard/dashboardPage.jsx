@@ -10,7 +10,7 @@ const DashboardPage = () => {
 
   const renderDashboard = () => {
     if (!isLogged) return <WelcomeGuest />;
-    if (user.role === "ADMIN_ROLE") return <AdminOverview />;
+    if (user.role === "ADMIN_ROLE" || user.role === "HOST_ROLE") return <AdminOverview />;
     return <UserHome />;
   };
 
