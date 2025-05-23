@@ -1,7 +1,12 @@
 import React from 'react';
+import { ReservationList } from '../../components';
 
-const reservationPage = () => {
-  return <div></div>;
+const ReservationPage = () => {
+  return (
+    <div>
+      <ReservationList />
+    </div>
+  );
 };
 
-export default reservationPage;
+export default ReservationPage;

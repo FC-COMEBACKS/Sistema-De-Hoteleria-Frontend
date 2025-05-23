@@ -1,1 +1,1 @@
-export { default as reservationPage } from "./reservationPage.jsx";
+export { default as ReservationPage } from './reservationPage.jsx';

@@ -165,3 +165,60 @@ export const updateRoom = async (id, data) => {
         }
     }
 }
+
+// RESERVACIONES
+
+export const getReservations = async () => {
+    try {
+        return await api.get("/reservations");
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const getReservationById = async (id) => {
+    try {
+        return await api.get(`/reservations/listReser/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const addReservation = async (data) => {
+    try {
+        return await api.post("/reservations/createReser", data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateReservation = async (id, data) => {
+    try {
+        return await api.put(`/reservations/updateReser/${id}`, data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteReservation = async (id) => {
+    try {
+        return await api.delete(`/reservations/deleteReser/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
