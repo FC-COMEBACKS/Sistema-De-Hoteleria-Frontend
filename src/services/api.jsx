@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: "http://127.0.0.1:3000/FYPH/v1",
     timeout: 3000,
     httpsAgent: false
-});
+})
 
 api.interceptors.request.use(
     (config) => {
@@ -27,7 +27,7 @@ api.interceptors.request.use(
     (error) => {
         return Promise.reject(error);
     }
-);
+)
 
 export const register = async (data) => {
     try {
@@ -51,6 +51,8 @@ export const login = async (data) => {
     }
 }
 
+// USUARIOS
+
 export const getUsers = async () => {
     try {
         return await api.get("/users");
@@ -62,6 +64,7 @@ export const getUsers = async () => {
     }
 }
 
+// HOTELES
 export const getHoteles = async () => {
     try {
         return await api.get("/hotels");
@@ -109,6 +112,52 @@ export const updateHotel = async (id, data) => {
 export const deleteHotel = async (id) => {
     try {
         return await api.delete(`/hotels/deleteHotel/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+// HABITACIONES
+
+export const getRooms = async () => {
+    try {
+        return await api.get("/rooms/getRooms");
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const getRoomById = async (id) => {
+    try {
+        return await api.get(`/rooms/getRoomById/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const createRooms = async (data) => {
+    try {
+        return await api.post("/rooms/createRoom", data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateRoom = async (id, data) => {
+    try {
+        return await api.put(`/rooms/updateRoom/${id}`, data);
     } catch (err) {
         return {
             error: true,

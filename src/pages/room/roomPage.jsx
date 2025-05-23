@@ -1,9 +1,13 @@
 import React from 'react';
-import { HabitacionesList } from '../../components/habitaciones/HabitacionesList.jsx';
-const roomPage = () => {
-  return <div>
-    <HabitacionesList />
-    </div>;
+import { HabitacionesList } from '../../components';
+import './roomPage.css'; 
+
+const RoomPage = () => {
+  return (
+    <div>
+      <HabitacionesList />
+    </div>
+  );
 };
 
-export default roomPage;
+export default RoomPage;

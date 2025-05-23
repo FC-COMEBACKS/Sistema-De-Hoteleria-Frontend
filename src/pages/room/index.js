@@ -1,1 +1,1 @@
-export { default as roomPage } from "./roomPage.jsx";
+export { default as RoomPage } from "./roomPage.jsx";

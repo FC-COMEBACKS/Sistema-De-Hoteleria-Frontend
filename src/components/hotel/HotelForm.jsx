@@ -55,7 +55,7 @@ const HotelForm = ({ onSubmit, onCancel, initialData = null }) => {
             ...prev,
             services: updatedServices
         }));
-    };  
+    };
 
     const addService = () => {
         setForm((prev) => ({
@@ -151,7 +151,7 @@ const HotelForm = ({ onSubmit, onCancel, initialData = null }) => {
                             onChange={(e) => handleServiceChange(idHotel, e)}
                             placeholder="Precio"
                             min={0}
-                            step="0.01" 
+                            step="0.01"
                             required
                         />
                         {form.services.length > 1 && (

@@ -24,8 +24,8 @@ const HotelTable = ({ hotels, onEdit, onDelete }) => (
                     <td>{hotel.telephone}</td>
                     <td>
                         <ul>
-                            {hotel.services && hotel.services.map((service, idx) => (
-                                <li key={idx}>
+                            {hotel.services && hotel.services.map((service, hotelId) => (
+                                <li key={hotelId}>
                                     {service.type} - ${service.price}
                                 </li>
                             ))}

@@ -4,82 +4,135 @@ const initialForm = {
     name: '',
     description: '',
     capacity: '',
-    pricePerDay: ''
-};
+    pricePerDay: '',
+    type: '',
+    hotel: '',
+}
 
-export const HabitacionesForm = ({ onSubmit, onCancel, initialData = null }) => {
+const roomTypes = [
+    { value: '', label: 'Selecciona un tipo' },
+    { value: 'SINGLE', label: 'Sencilla' },
+    { value: 'DOUBLE', label: 'Doble' },
+    { value: 'SUITE', label: 'Suite' },
+    { value: 'DELUXE', label: 'Deluxe' },
+]
+
+export const HabitacionesForm = ({
+    onSubmit,
+    onCancel,
+    initialData = null,
+    hotels = [],
+}) => {
     const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
         if (initialData) {
-            setForm(initialData);
+            setForm({
+                ...initialForm,
+                ...initialData,
+                hotel: initialData.hotel?._id || initialData.hotel || '',
+            });
         } else {
             setForm(initialForm);
         }
     }, [initialData]);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setForm({ ...form, [name]: value });
-    };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (
+            !form.name || !form.description || !form.capacity || !form.pricePerDay || !form.type || !form.hotel 
 
-        if (!form.name || !form.description || !form.capacity || !form.pricePerDay) {
-            alert('Por favor completa todos los campos');
+        ) {
+            alert('Por favor, completa todos los campos obligatorios.');
             return;
         }
-        onSubmit(form);
+        const formToSend = {
+            ...form,
+            pricePerDay: Number(form.pricePerDay),
+        };
+        onSubmit(formToSend);
 
-        if (!initialData) {
-            setForm(initialForm);
-        }
+        if (!initialData) setForm(initialForm);
     };
 
     return (
-        <form onSubmit={handleSubmit} className='habitacion-form'>
+        <form onSubmit={handleSubmit} className="hotel-form">
             <h3>{initialData ? 'Editar habitación' : 'Agregar habitación'}</h3>
-
             <input
-                type='text'
-                name='name'
+                type="text"
+                name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder='Nombre'
+                placeholder="Nombre"
+                required
             />
-            <input
-                type='text'
-                name='description'
+            <textarea
+                name="description"
                 value={form.description}
                 onChange={handleChange}
-                placeholder='Descripción'
+                placeholder="Descripción"
+                required
             />
             <input
-                type='number'
-                name='capacity'
+                type="number"
+                name="capacity"
                 value={form.capacity}
                 onChange={handleChange}
-                placeholder='Capacidad'
-                min='1'
+                placeholder="Capacidad"
+                min={1}
+                required
             />
             <input
-                type='number'
-                name='pricePerDay'
+                type="number"
+                name="pricePerDay"
                 value={form.pricePerDay}
                 onChange={handleChange}
-                placeholder='Precio por día'
-                min='0'
+                placeholder="Precio por día"
+                min={0}
+                step="0.01"
+                required
             />
-
-            <div className='form-buttons'>
-                <button type='submit' className='add-button'>
+            <select
+                name="type"
+                value={form.type}
+                onChange={handleChange}
+                required
+            >
+                {roomTypes.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+            <select
+                name="hotel"
+                value={form.hotel}
+                onChange={handleChange}
+                required
+            >
+                <option value="">Selecciona un hotel</option>
+                {hotels.map((h) => (
+                    <option key={h.hid || h._id} value={h.hid || h._id}>
+                        {h.name}
+                    </option>
+                ))}
+            </select>
+            <div className="form-buttons">
+                <button type="submit" className="add-button">
                     {initialData ? 'Actualizar' : 'Guardar'}
                 </button>
-                <button type='button' className='cancel-button' onClick={onCancel}>
-                    cancelar
+                <button type="button" className="cancel-button" onClick={onCancel}>
+                    Cancelar
                 </button>
-                </div>
+            </div>
         </form>
-    )
-}
+    );
+};

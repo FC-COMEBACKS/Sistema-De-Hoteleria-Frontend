@@ -7,28 +7,10 @@ import toast from "react-hot-toast";
 
 const Notification = (message) => {
     toast.custom((t) => (
-        <div
-            style={{
-                background: '#fff',
-                fontSize: '16px',
-                padding: '10px 20px',
-                borderRadius: '5px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-            }}
-        >
-            <span style={{ color: '#000' }}>{message}</span>
+        <div className="hotel-toast">
+            <span className="hotel-toast-message">{message}</span>
             <button
-                style={{
-                    marginLeft: 'auto',
-                    background: '#ff5252',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '3px',
-                    padding: '6px 12px',
-                    cursor: 'pointer',
-                }}
+                className="hotel-toast-close"
                 onClick={() => toast.dismiss(t.id)}
             >
                 Cerrar
@@ -68,10 +50,7 @@ const HotelList = () => {
     };
 
     const handleDeleteHotel = async (hid) => {
-        const confirm = window.confirm("¿Estás seguro de eliminar este hotel?");
-        if (confirm) {
-            await deleteHotel(hid);
-        }
+        await deleteHotel(hid);
     };
 
     const filteredHotels = hotels.filter((hotel) =>

@@ -1,16 +1,16 @@
 import React from 'react';
 
-export const habitacionesToolbar = ({ search, setSearch }) => (
-    <div className='toolbar'>
+export const HabitacionesToolbar = ({ search, setSearch, onAddClick }) => (
+    <div className="toolbar">
         <input
-            type = 'text'
-            placeholder = 'Buscar por nombre o descripción...'
-            className = 'search-input'
-            value = {search}
-            onChange = {(e) => setSearch(e.target.value)}
-        />    
-        <button className='add-button'>
-            Agregar Habitación
+            type="text"
+            placeholder="Buscar por nombre..."
+            className="search-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="add-button" onClick={onAddClick}>
+            + Agregar Habitación
         </button>
     </div>
-)
+);
