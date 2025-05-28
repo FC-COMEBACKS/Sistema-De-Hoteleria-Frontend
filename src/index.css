@@ -69,6 +69,11 @@ span {
   color: #333;
 }
 
+.card a, .card a:visited, .card a:active, .card a:focus, .card a:hover, .card .admin-link, a.admin-link {
+  color: #fff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
