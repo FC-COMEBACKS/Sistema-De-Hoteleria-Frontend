@@ -1,3 +1,111 @@
+/* Mejorar la visualización del formulario de edición */
+.user-perfil-page {
+  background: rgba(30, 42, 62, 0.25);
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.perfil-content {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+
+/* Perfil de usuario */
+.users-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: rgba(30, 42, 62, 0.55);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  padding: 32px 24px;
+  color: #e3f2fd;
+  backdrop-filter: blur(4px);
+}
+
+.perfil-header-box {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #38f9d7;
+  padding-bottom: 15px;
+}
+
+.perfil-header-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #43e97b 10%, #2196f3 60%, #38f9d7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1.5px;
+  animation: gradient-move 3s linear infinite;
+}
+
+.perfil-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+  margin-bottom: 24px;
+}
+
+.perfil-table th {
+  background: linear-gradient(90deg, #232b3e 0%, #2196f3 100%);
+  color: #e3f2fd !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  padding: 14px 10px;
+}
+
+.perfil-table tr {
+  background: rgba(44, 62, 80, 0.85);
+  transition: background 0.2s;
+}
+
+.perfil-table tbody tr:nth-child(even) {
+  background: rgba(33, 150, 243, 0.13);
+}
+
+.perfil-table tbody tr:hover {
+  background: rgba(67, 233, 123, 0.18);
+  box-shadow: 0 2px 12px rgba(33, 150, 243, 0.10);
+}
+
+.perfil-table th, .perfil-table td {
+  border-right: 2px solid #38f9d7;
+}
+
+.perfil-table td {
+  border-top: 1px solid #43e97b;
+  border-bottom: 1px solid #43e97b;
+  vertical-align: middle;
+  padding: 12px 10px;
+  background: transparent;
+  color: #e3f2fd;
+}
+
+.perfil-table th:last-child,
+.perfil-table td:last-child {
+  border-right: none;
+}
+
+.badge-activo {
+  background: linear-gradient(90deg, #43e97b 60%, #38f9d7 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 3px 12px;
+  font-size: 0.97em;
+  font-weight: 600;
+  display: inline-block;
+}
 .hotels-container {
   max-width: 1100px;
   margin: 40px auto;

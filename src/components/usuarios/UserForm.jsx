@@ -28,14 +28,20 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
 
     useEffect(() => {
         if (initialData) {
+            // Asegurarnos que todos los campos tienen valores por defecto
             setForm({
+                ...initialForm,
                 ...initialData,
-                password: "" 
+                password: "",
+                role: initialData.role || "",
+                events: initialData.events || "" 
             });
         } else {
             setForm(initialForm);
         }
-    }, [initialData]);    const handleChange = (e) => {
+    }, [initialData]);
+    
+    const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setForm((prev) => ({
             ...prev,
@@ -102,7 +108,8 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
             />
             {isEdit && (
                 <small>Deja este campo vacío si no deseas cambiar la contraseña.</small>
-            )}            <select
+            )}
+            <select
                 name="role"
                 value={form.role}
                 onChange={handleChange}
@@ -114,7 +121,7 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
             </select>
             <select
                 name="events"
-                value={form.events}
+                value={form.events || ''}
                 onChange={handleChange}
             >
                 <option value="">Selecciona un evento (opcional)</option>

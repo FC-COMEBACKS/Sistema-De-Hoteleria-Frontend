@@ -15,7 +15,7 @@ api.interceptors.request.use(
                 const parsedUser = JSON.parse(userDetails);
                 if (parsedUser?.token) {
                     config.headers.Authorization = `Bearer ${parsedUser.token}`;
-                    console.log("Token agregado al header:", parsedUser.token); 
+                    // console.log("Token agregado al header:", parsedUser.token);
                 }
             } catch (err) {
                 console.warn("Error al leer el token:", err);
@@ -28,6 +28,23 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 )
+
+// Interceptor para manejar errores globales
+api.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        // Si el error es 401 (no autorizado) y no estamos en login, limpiar localStorage y redirigir
+        if (error.response && error.response.status === 401 && !window.location.pathname.includes('/auth')) {
+            console.warn('Sesión expirada o inválida');
+            localStorage.removeItem('user');
+            // Redirigir a login si no estamos ya en login
+            window.location.href = '/auth';
+        }
+        return Promise.reject(error);
+    }
+);
 
 export const register = async (data) => {
     try {
@@ -110,7 +127,20 @@ export const updatePassword = async (data) => {
 
 export const updateUser = async (data) => {
     try {
-        return await api.put("/users/updateUser", data);
+        const response = await api.put("/users/updateUser", data);
+        console.log("Respuesta updateUser:", response);
+        
+        // Si la actualización fue exitosa, actualizar el usuario en localStorage
+        if (response.data && response.data.user) {
+            const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+            const updatedUser = {
+                ...currentUser,
+                ...response.data.user
+            };
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+        }
+        
+        return response;
     } catch (err) {
         return {
             error: true,

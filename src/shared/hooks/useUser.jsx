@@ -106,19 +106,35 @@ export const useUser = () => {
             toast.error("Error al actualizar contraseña " + err.message);
             return false;
         }
-    };
-
-    const updateUser = async (data) => {
+    };    const updateUser = async (data) => {
         setIsLoading(true);
         try {
             const response = await updateUserRequest(data);
             setIsLoading(false);
+            
             if (response.error) {
-                toast.error("Error al actualizar usuario");
+                const errorMsg = response.err?.response?.data?.message || "Error al actualizar usuario";
+                toast.error(errorMsg);
                 return false;
             }
+            
+            // Si estamos actualizando el usuario actual, actualizar en localStorage
+            if (data.uid === userDetails.uid || !data.uid) {
+                // Mantener el token y otros datos importantes
+                const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+                const updatedUser = {
+                    ...currentUser,
+                    ...data,
+                    ...(response.data?.user || {})
+                };
+                
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            }
+            
             toast.success("Usuario actualizado correctamente");
-            await fetchUsers();
+            if (userRole === "ADMIN_ROLE" || userRole === "HOST_ROLE") {
+                await fetchUsers();
+            }
             return true;
         } catch (err) {
             setIsLoading(false);

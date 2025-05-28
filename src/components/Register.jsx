@@ -12,6 +12,7 @@ import {
 } from "../shared/validators";
 import { Input } from "./Input";
 import { useRegister } from "../shared/hooks/useRegister";
+import "./register.css";
 
 const Register = ({ switchAuthHandler }) => {
   const { register, isLoading } = useRegister();
@@ -81,65 +82,62 @@ const Register = ({ switchAuthHandler }) => {
     event.preventDefault();
     register(formState.name.value, formState.email.value, formState.password.value);
   }
-
   const isSubmitDisabled =
     isLoading ||
     !formState.name.isValid ||
     !formState.email.isValid ||
     !formState.password.isValid ||
-    !formState.passwordConfirm.isValid || isLoading
-
-  return (
-    <div >
-      <form >
-        <Input
-          field="name"
-          label="Ingresa tu name"
-          value={formState.name.value}
-          onChangeHandler={handleInputValueChange}
-          type="text"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.name.showError}
-          validationMessage={validateNameMessage}
-        />
-        <Input
-          field="email"
-          label="Ingresa tu email"
-          value={formState.email.value}
-          onChangeHandler={handleInputValueChange}
-          type="text"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.email.showError}
-          validationMessage={validateEmailMessage}
-        />
-        <Input
-          field="password"
-          label="Ingresa tu contraseña"
-          value={formState.password.value}
-          onChangeHandler={handleInputValueChange}
-          type="text"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.password.showError}
-          validationMessage={validatePasswordMessage}
-        />
-        <Input
-          field="passwordConfirm"
-          label="Re-ingresa tu contraseña"
-          value={formState.passwordConfirm.value}
-          onChangeHandler={handleInputValueChange}
-          type="text"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.passwordConfirm.showError}
-          validationMessage={validateConfirmPasswordMessage}
-        />
-      </form>
-      <button onClick={handleRegister} disabled={isSubmitDisabled} >
-        enviar
+    !formState.passwordConfirm.isValid;return (
+    <form className="register-form" onSubmit={(e) => { e.preventDefault(); handleRegister(e); }}>
+      <h1>Crear Cuenta</h1>
+      
+      <Input
+        field="name"
+        label="Nombre"
+        value={formState.name.value}
+        onChangeHandler={handleInputValueChange}
+        type="text"
+        onBlurHandler={handleInputValidationOnBlur}
+        showErrorMessage={formState.name.showError}
+        validationMessage={validateNameMessage}
+      />
+      <Input
+        field="email"
+        label="Email"
+        value={formState.email.value}
+        onChangeHandler={handleInputValueChange}
+        type="text"
+        onBlurHandler={handleInputValidationOnBlur}
+        showErrorMessage={formState.email.showError}
+        validationMessage={validateEmailMessage}
+      />
+      <Input
+        field="password"
+        label="Contraseña"
+        value={formState.password.value}
+        onChangeHandler={handleInputValueChange}
+        type="password"
+        onBlurHandler={handleInputValidationOnBlur}
+        showErrorMessage={formState.password.showError}
+        validationMessage={validatePasswordMessage}
+      />
+      <Input
+        field="passwordConfirm"
+        label="Confirmar contraseña"
+        value={formState.passwordConfirm.value}
+        onChangeHandler={handleInputValueChange}
+        type="password"
+        onBlurHandler={handleInputValidationOnBlur}
+        showErrorMessage={formState.passwordConfirm.showError}
+        validationMessage={validateConfirmPasswordMessage}
+      />
+      <button type="submit" disabled={isSubmitDisabled} className="button">
+        {isLoading ? "Procesando..." : "Registrarse"}
       </button>
-      <span onClick={switchAuthHandler} className="auth-form-switch-label">
-        ¿Ya tienes una cuenta?  Inicia sesión acá!!!
+      <span onClick={switchAuthHandler} className="span">
+        ¿Ya tienes una cuenta? Inicia sesión
       </span>
-    </div>
+    </form>
   );
 };
 

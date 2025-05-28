@@ -30,15 +30,24 @@ const PasswordForm = ({ onSubmit, onCancel }) => {
 
 const UserMiPerfil = () => {
     const { updateUser, deleteUserClient, updatePassword } = useUser();
-    const userDetails = JSON.parse(localStorage.getItem("user") || "{}");
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
+    const userDetails = userData;
     const [showEdit, setShowEdit] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleUpdate = async (formData) => {
-        const success = await updateUser(formData);
-        if (success) {
-            toast.success("Perfil actualizado");
-            setShowEdit(false);
+        try {
+            const success = await updateUser(formData);
+            if (success) {
+                // Actualizar datos locales del usuario al editar el perfil
+                const updatedUser = {...userData, ...formData};
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUserData(updatedUser);
+                toast.success("Perfil actualizado");
+                setShowEdit(false);
+            }
+        } catch (error) {
+            toast.error("Error al actualizar el perfil: " + error.message);
         }
     };
 
@@ -65,8 +74,8 @@ const UserMiPerfil = () => {
                 </h2>
             </div>
             {!showEdit && !showPassword && (
-                <div>
-                    <table className="perfil-table perfil-table-style">
+                <div className="perfil-content">
+                    <table className="perfil-table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>

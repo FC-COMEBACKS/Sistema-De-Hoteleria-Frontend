@@ -3,6 +3,7 @@ import WelcomeGuest from "../../components/dashboard/WelcomeGuest";
 import AdminOverview from "../../components/dashboard/AdminOverview";
 import UserHome from "../../components/dashboard/userHome";
 import { useUserDetails } from "../../shared/hooks/useUserDetails";
+import "../dashboard/dashboardPage.css";
 
 const DashboardPage = () => {
   const { isLogged } = useUserDetails();
@@ -15,7 +16,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div style={{ width: "100%", textAlign: "center" }}>
+    <div className="dashboard-wrapper">
       {renderDashboard()}
     </div>
   );

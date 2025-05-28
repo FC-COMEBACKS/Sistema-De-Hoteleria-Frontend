@@ -8,6 +8,7 @@ import {
 } from "../shared/validators";
 import { Input } from "./Input";
 import { useLogin } from "../shared/hooks/useLogin";
+import "./login.css";
 
 const Login = ({ switchAuthHandler }) => {
   const { login, isLoading } = useLogin();
@@ -48,36 +49,38 @@ const Login = ({ switchAuthHandler }) => {
   };
 
   const isSubmitDisabled =
-    isLoading || !formState.email.isValid || !formState.password.isValid;
-
-  return (
+    isLoading || !formState.email.isValid || !formState.password.isValid;  return (
     <form className="login-form" onSubmit={handleLogin}>
       <h1>Iniciar Sesión</h1>
-      <Input
-        field="email"
-        label="Ingresa tu email"
-        value={formState.email.value}
-        onChangeHandler={handleInputValueChange}
-        type="text"
-        onBlurHandler={handleInputValidationOnBlur}
-        showErrorMessage={formState.email.showError}
-        validationMessage={validateEmailMessage}
-      />
-      <Input
-        field="password"
-        label="Ingresa tu contraseña"
-        value={formState.password.value}
-        onChangeHandler={handleInputValueChange}
-        type="password"
-        onBlurHandler={handleInputValidationOnBlur}
-        showErrorMessage={formState.password.showError}
-        validationMessage={validatePasswordMessage}
-      />
-      <button type="submit" disabled={isSubmitDisabled} className="button">
-        Login
+      <div className="form-group">
+        <Input
+          field="email"
+          label="Email"
+          value={formState.email.value}
+          onChangeHandler={handleInputValueChange}
+          type="email"
+          onBlurHandler={handleInputValidationOnBlur}
+          showErrorMessage={formState.email.showError}
+          validationMessage={validateEmailMessage}
+        />
+      </div>
+      <div className="form-group">
+        <Input
+          field="password"
+          label="Contraseña"
+          value={formState.password.value}
+          onChangeHandler={handleInputValueChange}
+          type="password"
+          onBlurHandler={handleInputValidationOnBlur}
+          showErrorMessage={formState.password.showError}
+          validationMessage={validatePasswordMessage}
+        />
+      </div>
+      <button type="submit" disabled={isSubmitDisabled}>
+        {isLoading ? "Procesando..." : "Iniciar Sesión"}
       </button>
-      <span onClick={switchAuthHandler} className="span" style={{ cursor: "pointer" }}>
-        ¿No tienes cuenta aún? ¡Regístrate acá!
+      <span onClick={switchAuthHandler} className="span">
+        ¿No tienes cuenta aún? Regístrate
       </span>
     </form>
   );
