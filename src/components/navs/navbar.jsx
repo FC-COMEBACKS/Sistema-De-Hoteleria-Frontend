@@ -4,7 +4,7 @@ import "./navbar.css";
 import { useUserDetails } from "../../shared/hooks/useUserDetails";
 
 const Navbar = () => {
-  const { isLogged, logout } = useUserDetails();
+  const { isLogged, logout, userDetails } = useUserDetails();
 
   return (
     <nav className="navbar">
@@ -12,6 +12,13 @@ const Navbar = () => {
       <Link to="/hotel">Hoteles</Link>
       <Link to="/reservation">Reservaciones</Link>
       <Link to="/room">Habitaciones</Link>
+      {/* SOLO admin/host pueden ver Usuarios */}
+      {isLogged && userDetails?.role !== "CLIENT_ROLE" && (
+        <Link to="/user">Usuarios</Link>
+      )}
+      {isLogged && userDetails?.role === "CLIENT_ROLE" && (
+        <Link to="/mi-perfil">Mi Perfil</Link>
+      )}
       {!isLogged ? (
         <Link to="/auth">Iniciar Sesión</Link>
       ) : (

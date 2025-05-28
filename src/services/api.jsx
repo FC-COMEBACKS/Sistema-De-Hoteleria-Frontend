@@ -64,6 +64,94 @@ export const getUsers = async () => {
     }
 }
 
+export const getUserById = async (id) => {
+    try {
+        return await api.get(`/users/findUser/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteUserAdmin = async (id) => {
+    try {
+        return await api.delete(`/users/deleteUserAdmin/${id}`);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteUserClient = async () => {
+    try {
+        return await api.delete("/users/deleteUserClient");
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updatePassword = async (data) => {
+    try {
+        return await api.patch("/users/updatePassword", data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateUser = async (data) => {
+    try {
+        return await api.put("/users/updateUser", data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateUserAdmin = async (id, data) => {
+    try {
+        return await api.put(`/users/updateUserAdmin/${id}`, data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const createUser = async (data) => {
+    try {
+        return await api.post("/users/createUser", data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateRole = async (id, data) => {
+    try {
+        return await api.patch(`/users/updateRole/${id}`, data);
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
 // HOTELES
 export const getHoteles = async () => {
     try {

@@ -15,3 +15,7 @@ export { default as ReservationForm } from './reservacion/ReservationForm.jsx';
 export { default as ReservationList } from './reservacion/ReservationList.jsx';
 export { default as ReservationTable } from './reservacion/ReservationTable.jsx';
 export { default as ReservationToolbar } from './reservacion/ReservationToolbar.jsx';
+export { default as UserForm } from './usuarios/UserForm.jsx';
+export { default as UserList } from './usuarios/UserList.jsx';
+export { default as UserTable } from './usuarios/UserTable.jsx';
+export { default as UserToolbar } from './usuarios/UserToolbar.jsx';
