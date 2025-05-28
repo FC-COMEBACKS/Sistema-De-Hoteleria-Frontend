@@ -4,8 +4,9 @@ const initialForm = {
     name: "",
     email: "",
     password: "",
-    role: "CLIENT_ROLE",
-    events: ""
+    role: "",
+    events: "",
+    status: true
 };
 
 const roleOptions = [
@@ -34,26 +35,40 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
         } else {
             setForm(initialForm);
         }
-    }, [initialData]);
-
-    const handleChange = (e) => {
+    }, [initialData]);    const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setForm((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? checked : value
         }));
     };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         let formToSend = { ...form };
+        
+        // Remove empty fields
         if (isEdit && !formToSend.password) {
             delete formToSend.password;
         }
-        // Cambia 'name' a 'username' para el backend
-        if (formToSend.name) {
-            formToSend.username = formToSend.name;
-            delete formToSend.name;
+        
+        // Make role and events optional (send only if they have values)
+        if (formToSend.role === "") {
+            delete formToSend.role;
         }
+        if (formToSend.events === "") {
+            delete formToSend.events;
+        }
+        
+        // Convert 'name' field to match backend expectation
+        // The backend auth/register endpoint expects 'name', not 'username'
+        
+        // Ensure status is properly set
+        if (formToSend.status === undefined) {
+            formToSend.status = true;
+        }
+        
+        console.log("Sending form data:", formToSend);
         onSubmit(formToSend);
         if (!initialData) setForm(initialForm);
     };
@@ -87,14 +102,12 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
             />
             {isEdit && (
                 <small>Deja este campo vacío si no deseas cambiar la contraseña.</small>
-            )}
-            <select
+            )}            <select
                 name="role"
                 value={form.role}
                 onChange={handleChange}
-                required
             >
-                <option value="">Selecciona un rol</option>
+                <option value="">Selecciona un rol (opcional)</option>
                 {roleOptions.map((role) => (
                     <option key={role.value} value={role.value}>{role.label}</option>
                 ))}
@@ -103,9 +116,8 @@ const UserForm = ({ onSubmit, onCancel, initialData = null, isEdit = false }) =>
                 name="events"
                 value={form.events}
                 onChange={handleChange}
-                required
             >
-                <option value="">Selecciona un evento</option>
+                <option value="">Selecciona un evento (opcional)</option>
                 {eventOptions.map((event) => (
                     <option key={event.value} value={event.value}>{event.label}</option>
                 ))}

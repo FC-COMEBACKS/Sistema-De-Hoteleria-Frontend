@@ -83,8 +83,8 @@ const ReservationList = () => {
     });
 
     return (
-        <div className="hotels-container">
-            <h2 className="hotels-title">Lista de Reservaciones</h2>
+        <div className="reservations-container">
+            <h2 className="reservations-title">Lista de Reservaciones</h2>
             <ReservationToolbar
                 search={search}
                 setSearch={setSearch}
@@ -94,7 +94,7 @@ const ReservationList = () => {
                 }}
             />
 
-            <div className="hotel-content">
+            <div className="reservation-content">
                 <div className="table-section">
                     <ReservationTable
                         reservations={filteredReservations}

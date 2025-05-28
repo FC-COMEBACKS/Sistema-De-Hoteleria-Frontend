@@ -53,56 +53,59 @@ const ReservationForm = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="reservation-form">
+        <form onSubmit={handleSubmit} className="hotel-form reservation-form">
             <h3>{initialData ? "Editar reservación" : "Agregar reservación"}</h3>
 
-            <label>Hotel:</label>
-            <select
-                name="hotel"
-                value={form.hotel}
-                onChange={handleChange}
-                required
-            >
-                <option value="">Selecciona un hotel</option>
-                {hotels.map((hotel) => (
-                    <option key={hotel._id || hotel.hid} value={hotel._id || hotel.hid}>
-                        {hotel.name}
-                    </option>
-                ))}
-            </select>
 
-            <label>Habitación:</label>
-            <select
-                name="room"
-                value={form.room}
-                onChange={handleChange}
+            <div style={{ display: 'flex', gap: 10 }}>
+                <select
+                    name="hotel"
+                    value={form.hotel}
+                    onChange={handleChange}
+                    required
+                    style={{ flex: 1 }}
+                >
+                    <option value="">Selecciona un hotel</option>
+                    {hotels.map((hotel) => (
+                        <option key={hotel._id || hotel.hid} value={hotel._id || hotel.hid}>
+                            {hotel.name}
+                        </option>
+                    ))}
+                </select>
+                <select
+                    name="room"
+                    value={form.room}
+                    onChange={handleChange}
+                    required
+                    style={{ flex: 1 }}
+                >
+                    <option value="">Selecciona una habitación</option>
+                    {filteredRooms.map((room) => (
+                        <option key={room._id || room.rid} value={room._id || room.rid}>
+                            {room.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
-            >
-                <option value="">Selecciona una habitación</option>
-                {filteredRooms.map((room) => (
-                    <option key={room._id || room.rid} value={room._id || room.rid}>
-                        {room.name}
-                    </option>
-                ))}
-            </select>
-
-            <label>Fecha de inicio:</label>
-            <input
-                type="date"
-                name="startDate"
-                value={form.startDate}
-                onChange={handleChange}
-                required
-            />
-
-            <label>Fecha de salida:</label>
-            <input
-                type="date"
-                name="exitDate"
-                value={form.exitDate}
-                onChange={handleChange}
-                required
-            />
+            <div style={{ display: 'flex', gap: 10 }}>
+                <input
+                    type="date"
+                    name="startDate"
+                    value={form.startDate}
+                    onChange={handleChange}
+                    required
+                    style={{ flex: 1 }}
+                />
+                <input
+                    type="date"
+                    name="exitDate"
+                    value={form.exitDate}
+                    onChange={handleChange}
+                    required
+                    style={{ flex: 1 }}
+                />
+            </div>
 
             <div className="form-buttons">
                 <button type="submit" className="add-button">

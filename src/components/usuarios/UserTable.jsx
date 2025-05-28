@@ -18,9 +18,9 @@ const UserTable = ({ users, onEdit, onDelete }) => (
             {users.map((user) => (
                 <tr key={user.uid || user._id}>
                     <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
-                    <td>{user.events}</td>
+                    <td>{user.email}</td>                    
+                    <td>{user.role || "No asignado"}</td>
+                    <td>{user.events === "Sin eventos asignados" ? "No asignado" : user.events || "No asignado"}</td>
                     <td>{user.status ? "Activo" : "Inactivo"}</td>
                     <td>
                         <div className="action-buttons">

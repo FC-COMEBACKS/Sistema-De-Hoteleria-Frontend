@@ -23,7 +23,7 @@ const Notification = (message) => {
 };
 
 const UserList = () => {
-    const { users, createUser, deleteUserAdmin, updateUserAdmin, isLoading } = useUser();
+    const { users, createUser, deleteUserAdmin, updateUserAdmin, isLoading, fetchUsers } = useUser();
     const [search, setSearch] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
@@ -41,6 +41,7 @@ const UserList = () => {
             setShowForm(false);
             setEditingUser(null);
             Notification("Usuario guardado correctamente");
+            await fetchUsers(); // <-- Agrega esta línea para refrescar la tabla
         }
     };
 

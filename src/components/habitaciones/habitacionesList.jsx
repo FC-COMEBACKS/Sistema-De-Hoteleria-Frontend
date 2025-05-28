@@ -78,6 +78,7 @@ export const HabitacionesList = () => {
                     <HabitacionesTable
                         rooms={filteredRooms}
                         onEdit={handleEditClick}
+                        hotels={hotels} 
                     />
                 </div>
 

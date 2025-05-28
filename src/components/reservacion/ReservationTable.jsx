@@ -3,7 +3,7 @@ import { EditButton } from "../EditButton";
 import { DeleteButton } from "../DeleteButton";
 
 const ReservationTable = ({ reservations, onEdit, onDelete }) => (
-    <table className="reservations-table">
+    <table className="rooms-table reservations-table">
         <thead>
             <tr>
                 <th>Hotel</th>
